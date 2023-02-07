@@ -1,4 +1,5 @@
 from fastapi import FastAPI, HTTPException, Body
+from fastapi.middleware.cors import CORSMiddleware
 from datetime import date
 from pymongo import MongoClient
 from pydantic import BaseModel
@@ -29,6 +30,16 @@ db = client[DATABASE_NAME]
 collection = db[COLLECTION_NAME]
 
 app = FastAPI()
+
+origins = ["*"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # create sample data
 # collection.insert_one({
