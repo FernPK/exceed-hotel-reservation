@@ -154,19 +154,7 @@ class TestApi(unittest.TestCase):
         res = requests.post(BASE_URL + f"/reservation", json=myobj)
         
         self.assertEqual(res.status_code, 200)
-        self.assertTrue(list(collection.find(myobj)))
-
-    def test_post_room_id_int_in_str_form(self):
-        myobj = {
-            "name": mock_name,
-            "start_date": "2017-01-01",
-            "end_date": "2017-01-01",
-            "room_id": "10"
-        }
-
-        res = requests.post(BASE_URL + f"/reservation", json=myobj)
-        
-        self.assertEqual(res.status_code, 200)
+        self.assertFalse(list(collection.find(myobj)))
         self.assertTrue(list(collection.find(
             {
             "name": mock_name,
