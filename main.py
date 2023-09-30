@@ -13,7 +13,6 @@ password = os.getenv('password')
 DATABASE_NAME = "exceed04"
 COLLECTION_NAME = "hotelFern"
 MONGO_DB_URL = f"mongodb://{username}:{password}@mongo.exceed19.online"
-MONGO_DB_PORT = 8443
 
 
 class Reservation(BaseModel):
@@ -23,7 +22,7 @@ class Reservation(BaseModel):
     room_id: int
 
 
-client = MongoClient(f"{MONGO_DB_URL}:{MONGO_DB_PORT}")
+client = MongoClient(MONGO_DB_URL)
 
 db = client[DATABASE_NAME]
 
